@@ -1,6 +1,6 @@
 /// Collection of pseudo-random number generators
 ///
-/// The algorithms deliver deterministic randomness,
+/// The algorithms deliver deterministic statistical randomness,
 /// not cryptographic randomness.
 ///
 /// Algorithm 1: 128-bit Seiran PRNG
