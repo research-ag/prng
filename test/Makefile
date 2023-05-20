@@ -1,7 +1,9 @@
 MOPS_PKGS=$(shell mops sources)
 
-all: <package>
+all: mops test
 
-<package>:
-	moc $(MOPS_PKGS) -wasi-system-api <package>.mo && wasmtime <package>.wasm
+mops: 
+	mops install
 
+test:
+	moc $(MOPS_PKGS) -wasi-system-api prng.mo && wasmtime prng.wasm

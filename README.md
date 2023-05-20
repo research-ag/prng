@@ -1,13 +1,17 @@
-# ... for Motoko
+# Statistical pseudo-random number generators for Motoko
 
 ## Overview
 
+The package provides multiple pseudo-random number generators.
+
+Note: The PRNGs generate _statistical_ pseudo-random numbers. They are not cryptographically secure.
+
 ### Links
 
-The package is published on [MOPS](https://mops.one/...) and [GitHub](https://github.com/research-ag/...).
+The package is published on [MOPS](https://mops.one/prng) and [GitHub](https://github.com/research-ag/prng).
 Please refer to the README on GitHub where it renders properly with formulas and tables.
 
-The API documentation can be found [here](https://mops.one/.../docs/lib) on Mops.
+The API documentation can be found [here](https://mops.one/prng/docs/lib) on Mops.
 
 For updates, help, questions, feedback and other requests related to this package join us on:
 
@@ -15,32 +19,44 @@ For updates, help, questions, feedback and other requests related to this packag
 * [Twitter](https://twitter.com/mr_research_ag)
 * [Dfinity forum](https://forum.dfinity.org/)
 
-### Motivation
-
-### Interface
-
 ## Usage
 
 ### Install with mops
 
 You need `mops` installed. In your project directory run:
 ```
-mops add <...>
+mops add prng
 ```
 
 In the Motoko source file import the package as one of:
 ```
-import .. "mo:..";
+import Prng "mo:prng";
 ```
 
 ### Example
+
+```
+import Prng "mo:prng";
+
+let seed : Nat64 = 0;
+
+let rng = Prng.Seiran128();
+rng.init(seed);
+rng.next();
+rng.next();
+
+let rng2 = Prng.SFCa(); // SFCa is compatible to numpy
+rng2.init1(seed);
+rng.next();
+rng.next();
+```
 
 ### Build & test
 
 You need `moc` and `wasmtime` installed.
 Then run:
 ```
-git clone git@github.com:research-ag/....git
+git clone git@github.com:research-ag/prng.git
 make -C test
 ```
 
@@ -50,11 +66,19 @@ The benchmarking code can be found here: [canister-profiling](https://github.com
 
 ### Time
 
+Wasm instructios per invocation of `next()`.
+
+|method|Seiran128|SFC64|SFC32|
+|---|---|---|---|
+|next|251|377|253|
+
 ### Memory
 
-## Design
-
-## Implementation notes
+Heap allocation per invocation of `next()`.
+ 
+|method|Seiran128|SFC64|SFC32|
+|---|---|---|---|
+|next|36|48|8|
 
 ## Copyright
 
