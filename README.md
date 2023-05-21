@@ -46,7 +46,7 @@ rng.next();
 rng.next();
 
 let rng2 = Prng.SFCa(); // SFCa is compatible to numpy
-rng2.init1(seed);
+rng2.init(seed);
 rng.next();
 rng.next();
 ```
