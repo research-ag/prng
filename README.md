@@ -12,10 +12,10 @@ Currently implemented generators:
 
 ### Links
 
-The package is published on [MOPS](https://mops.one/prng) and [GitHub](https://github.com/research-ag/prng).
+The package is published on [Mops](https://mops.one/prng) and [GitHub](https://github.com/research-ag/prng).
 Please refer to the README on GitHub where it renders properly with formulas and tables.
 
-The API documentation can be found [here](https://mops.one/prng/docs/lib) on Mops.
+API documentation: [here on Mops](https://mops.one/prng/docs/lib)
 
 For updates, help, questions, feedback and other requests related to this package join us on:
 
