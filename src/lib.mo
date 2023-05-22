@@ -3,19 +3,26 @@
 /// The algorithms deliver deterministic statistical randomness,
 /// not cryptographic randomness.
 ///
-/// Algorithm 1: 128-bit Seiran PRNG.
+/// Algorithm 1: 128-bit Seiran PRNG\  
 /// See: https://github.com/andanteyk/prng-seiran
 ///
-/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG).
+/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)\
 /// See: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
 ///
-/// Copyright: 2023 MR Research AG.
-/// Main author: react0r-com.
-/// Contributors: Timo Hanke (timohanke). 
+/// Copyright: 2023 MR Research AG\
+/// Main author: react0r-com\
+/// Contributors: Timo Hanke (timohanke) 
 
 import { range } "mo:base/Iter";
 
 module {
+  /// Constructs a Seiran128 generator.
+  ///
+  /// Example:
+  /// ```motoko
+  /// import Prng "mo:prng"; 
+  /// let rng = Prng.Seiran128(); 
+  /// ```  
   public class Seiran128() {
 
     // state
@@ -26,7 +33,6 @@ module {
     ///  
     /// Example:
     /// ```motoko
-    ///
     /// import Prng "mo:prng"; 
     /// let rng = Prng.Seiran128(); 
     /// rng.init(0);
@@ -40,7 +46,6 @@ module {
     ///  
     /// Example:
     /// ```motoko
-    ///
     /// let rng = Prng.Seiran128(); 
     /// rng.init(0);
     /// rng.next(); // -> 11_505_474_185_568_172_049
@@ -92,14 +97,12 @@ module {
   ///
   /// Example:
   /// ```motoko
-  /// 
   /// import Prng "mo:prng"; 
   /// let rng = Prng.SFC64(24, 11, 3); 
   /// ```  
   /// For convenience, the function `SFC64a()` returns a generator constructed
   /// with the recommended parameter set (24, 11, 3).
   /// ```motoko
-  /// 
   /// import Prng "mo:prng"; 
   /// let rng = Prng.SFC64a(); 
   /// ```  
@@ -110,11 +113,31 @@ module {
     var c : Nat64 = 0;
     var d : Nat64 = 0;
 
-    /// Initializes the PRNG state with three seeds
+    /// Initializes the PRNG state with a particular seed
     ///  
     /// Example:
     /// ```motoko
-    ///
+    /// import Prng "mo:prng"; 
+    /// let rng = Prng.SFC64a(); 
+    /// rng.init(0);
+    /// ``` 
+    public func init(seed : Nat64) = init3(seed, seed, seed);
+
+    /// Initializes the PRNG state with a hardcoded seed.
+    /// No argument is required.
+    ///  
+    /// Example:
+    /// ```motoko
+    /// import Prng "mo:prng"; 
+    /// let rng = Prng.SFC64a(); 
+    /// rng.init_pre();
+    /// ``` 
+    public func init_pre() = init(0xcafef00dbeef5eed);
+
+    /// Initializes the PRNG state with three state variables
+    ///  
+    /// Example:
+    /// ```motoko
     /// import Prng "mo:prng"; 
     /// let rng = Prng.SFC64a(); 
     /// rng.init3(0, 1, 2);
@@ -128,34 +151,10 @@ module {
       for (_ in range(0, 11)) ignore next();
     };
 
-    /// Initializes the PRNG state with a particular seed
-    ///  
-    /// Example:
-    /// ```motoko
-    ///
-    /// import Prng "mo:prng"; 
-    /// let rng = Prng.SFC64a(); 
-    /// rng.init(0);
-    /// ``` 
-    public func init(seed : Nat64) = init3(seed, seed, seed);
-
-    /// Initializes the PRNG state with a hardcoded seed.
-    /// No argument is required.
-    ///  
-    /// Example:
-    /// ```motoko
-    ///
-    /// import Prng "mo:prng"; 
-    /// let rng = Prng.SFC64a(); 
-    /// rng.init_pre();
-    /// ``` 
-    public func init_pre() = init(0xcafef00dbeef5eed);
-
     /// Returns one output and advances the PRNG's state
     ///  
     /// Example:
     /// ```motoko
-    ///
     /// let rng = Prng.SFC64a(); 
     /// rng.init(0);
     /// rng.next(); // -> 4_237_781_876_154_851_393 
@@ -177,14 +176,12 @@ module {
   ///
   /// Example:
   /// ```motoko
-  /// 
   /// import Prng "mo:prng"; 
   /// let rng = Prng.SFC32(21, 9, 3); 
   /// ```  
   /// For convenience, the functions `SFC32a()` and `SFC32b()` return
   /// generators with the parameter sets a) and b) given above.
   /// ```motoko
-  /// 
   /// import Prng "mo:prng"; 
   /// let rng = Prng.SFC32a(); 
   /// ```  
@@ -198,7 +195,6 @@ module {
     ///  
     /// Example:
     /// ```motoko
-    ///
     /// import Prng "mo:prng"; 
     /// let rng = Prng.SFC32a(); 
     /// rng.init3(0, 1, 2);
@@ -216,7 +212,6 @@ module {
     ///  
     /// Example:
     /// ```motoko
-    ///
     /// import Prng "mo:prng"; 
     /// let rng = Prng.SFC32(); 
     /// rng.init(0);
@@ -228,7 +223,6 @@ module {
     ///  
     /// Example:
     /// ```motoko
-    ///
     /// import Prng "mo:prng"; 
     /// let rng = Prng.SFC32a(); 
     /// rng.init_pre();
@@ -239,7 +233,6 @@ module {
     ///  
     /// Example:
     /// ```motoko
-    ///
     /// let rng = Prng.SFC32a(); 
     /// rng.init(0);
     /// rng.next(); // -> 1_363_572_419 
@@ -255,13 +248,13 @@ module {
   };
 
   /// SFC64a is the same as numpy.
-  /// See [sfc64_next()](https:///github.com/numpy/numpy/blob/b6d372c25fab5033b828dd9de551eb0b7fa55800/numpy/random/src/sfc64/sfc64.h#L28)
+  /// See: [sfc64_next()](https:///github.com/numpy/numpy/blob/b6d372c25fab5033b828dd9de551eb0b7fa55800/numpy/random/src/sfc64/sfc64.h#L28)
   public func SFC64a() : SFC64 { SFC64(24, 11, 3) };
 
-  /// Ok to use (SFC32a or SFC32b) 
+  /// Ok to use
   public func SFC32a() : SFC32 { SFC32(21, 9, 3) };
   
-  /// Ok to use (SFC32a or SFC32b) 
+  /// Ok to use
   public func SFC32b() : SFC32 { SFC32(15, 8, 3) };
 
   /// Not recommended. Use `SFC64a` version.
