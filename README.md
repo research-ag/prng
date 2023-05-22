@@ -89,9 +89,9 @@ Heap allocation per invocation of `next()`.
 MR Research AG, 2023
 ## Authors
 
-Main author: react0r-com 
+Main author: react0r-com
+
 Contributors: Timo Hanke (timohanke) 
 ## License 
 
 Apache-2.0
-kkkkk
