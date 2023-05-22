@@ -3,7 +3,7 @@
 /// The algorithms deliver deterministic statistical randomness,
 /// not cryptographic randomness.
 ///
-/// Algorithm 1: 128-bit Seiran PRNG\  
+/// Algorithm 1: 128-bit Seiran PRNG\
 /// See: https://github.com/andanteyk/prng-seiran
 ///
 /// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)\
@@ -191,23 +191,6 @@ module {
     var c : Nat32 = 0;
     var d : Nat32 = 0;
 
-    /// Initializes the PRNG state with three seeds
-    ///  
-    /// Example:
-    /// ```motoko
-    /// import Prng "mo:prng"; 
-    /// let rng = Prng.SFC32a(); 
-    /// rng.init3(0, 1, 2);
-    /// ``` 
-    public func init3(seed1 : Nat32, seed2 : Nat32, seed3 : Nat32) {
-      a := seed1;
-      b := seed2;
-      c := seed3;
-      d := 1;
-
-      for (_ in range(0, 11)) ignore next();
-    };
-
     /// Initializes the PRNG state with a particular seed
     ///  
     /// Example:
@@ -228,6 +211,23 @@ module {
     /// rng.init_pre();
     /// ``` 
     public func init_pre() = init(0xbeef5eed);
+
+    /// Initializes the PRNG state with three seeds
+    ///  
+    /// Example:
+    /// ```motoko
+    /// import Prng "mo:prng"; 
+    /// let rng = Prng.SFC32a(); 
+    /// rng.init3(0, 1, 2);
+    /// ``` 
+    public func init3(seed1 : Nat32, seed2 : Nat32, seed3 : Nat32) {
+      a := seed1;
+      b := seed2;
+      c := seed3;
+      d := 1;
+
+      for (_ in range(0, 11)) ignore next();
+    };
 
     /// Returns one output and advances the PRNG's state
     ///  
