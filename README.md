@@ -6,6 +6,10 @@ The package provides multiple pseudo-random number generators.
 
 Note: The PRNGs generate _statistical_ pseudo-random numbers. They are not cryptographically secure.
 
+Currently implemented generators:
+* [Seiran128](https://github.com/andanteyk/prng-seiran)
+* [SFC64](https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html), SFC32
+
 ### Links
 
 The package is published on [MOPS](https://mops.one/prng) and [GitHub](https://github.com/research-ag/prng).
@@ -85,6 +89,9 @@ Heap allocation per invocation of `next()`.
 MR Research AG, 2023
 ## Authors
 
+Main author: react0r-com 
+Contributors: Timo Hanke (timohanke) 
 ## License 
 
 Apache-2.0
+kkkkk

@@ -3,15 +3,15 @@
 /// The algorithms deliver deterministic statistical randomness,
 /// not cryptographic randomness.
 ///
-/// Algorithm 1: 128-bit Seiran PRNG
+/// Algorithm 1: 128-bit Seiran PRNG.
 /// See: https://github.com/andanteyk/prng-seiran
 ///
-/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)
+/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG).
 /// See: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
 ///
-/// Copyright: 2023 MR Research AG
-/// Main author: react0r-com 
-/// Contributors: Timo Hanke (timohanke) 
+/// Copyright: 2023 MR Research AG.
+/// Main author: react0r-com.
+/// Contributors: Timo Hanke (timohanke). 
 
 import { range } "mo:base/Iter";
 
@@ -254,8 +254,8 @@ module {
     };
   };
 
-  /// SFC64a is the same as numpy:
-  /// https:///github.com/numpy/numpy/blob/b6d372c25fab5033b828dd9de551eb0b7fa55800/numpy/random/src/sfc64/sfc64.h#L28
+  /// SFC64a is the same as numpy.
+  /// See [sfc64_next()](https:///github.com/numpy/numpy/blob/b6d372c25fab5033b828dd9de551eb0b7fa55800/numpy/random/src/sfc64/sfc64.h#L28)
   public func SFC64a() : SFC64 { SFC64(24, 11, 3) };
 
   /// Ok to use (SFC32a or SFC32b) 
