@@ -32,7 +32,7 @@ You need `mops` installed. In your project directory run:
 mops add prng
 ```
 
-In the Motoko source file import the package as one of:
+In the Motoko source file import the package as:
 ```
 import Prng "mo:prng";
 ```
