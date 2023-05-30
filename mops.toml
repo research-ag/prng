@@ -5,3 +5,6 @@ description = "Statistical pseudo-random number generators"
 repository = "https://github.com/research-ag/prng"
 keywords = [ "rand", "random", "rng", "sfc", "seiran" ]
 license = "Apache-2.0"
+
+[dependencies]
+base = "0.9.1"
