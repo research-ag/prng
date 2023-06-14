@@ -7,4 +7,4 @@ keywords = [ "rand", "random", "rng", "sfc", "seiran" ]
 license = "Apache-2.0"
 
 [dependencies]
-base = "0.9.1"
+base = "0.9.2"
