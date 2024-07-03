@@ -3,10 +3,6 @@ on:
   pull_request:
     types: [synchronize, opened, reopened, ready_for_review, unlabeled]
 
-env:
-  mops_version: 0.12.1
-  moc_version: 0.9.0
-
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -15,23 +11,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Make bin directory
-        run: mkdir -p /home/runner/bin
+      - name: Install Node
+        uses: actions/setup-node@v4
 
-      - name: "install Motoko binaries"
+      - name: Install mops
+        uses: ZenVoich/setup-mops@v1.2.0
+
+      - name: Make sure moc is installed
+        run: mops toolchain bin moc || mops toolchain use moc latest
+
+      - name: Show mops version
         run: |
-          wget https://github.com/dfinity/motoko/releases/download/${{ env.moc_version }}/motoko-linux64-${{ env.moc_version }}.tar.gz
-          tar -xzf motoko-linux64-${{ env.moc_version }}.tar.gz -C /home/runner/bin
-          echo "/home/runner/bin" >> $GITHUB_PATH
+          mops --version
+          $(mops toolchain bin moc) --version
 
-      - name: "Install wasmtime"
-        run: |
-          curl https://wasmtime.dev/install.sh -sSf | bash
-          echo "/home/runner/.wasmtime/bin" >> $GITHUB_PATH
-  
-      - name: "install mops"
-        run: |          
-          npm i -g ic-mops@${{ env.mops_version }}
-
-      - name: "test"
-        run: make -C test
+      - name: Run tests
+        run: mops test
