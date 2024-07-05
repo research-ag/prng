@@ -39,6 +39,10 @@ import Prng "mo:prng";
 
 ### Example
 
+The two most commonly used generators from this package are Seiran128 und SFC64a.
+They both produce Nat64 output values.
+SFC64a is compatible to numpy.
+
 ```
 import Prng "mo:prng";
 
@@ -46,13 +50,11 @@ let seed : Nat64 = 0;
 
 let rng = Prng.Seiran128();
 rng.init(seed);
-rng.next();
-rng.next();
+let seq : [Nat64] = [rng.next(), rng.next()];
 
-let rng2 = Prng.SFCa(); // SFCa is compatible to numpy
+let rng2 = Prng.SFC64a();
 rng2.init(seed);
-rng.next();
-rng.next();
+let seq2 : [Nat64] = [rng2.next(), rng2.next()];
 ```
 
 ### Build & test
