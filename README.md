@@ -70,7 +70,7 @@ let seq : [Nat32] = [rng.next(), rng.next()];
 ```
 
 For SFC the internal parameters of the generator can also be customized with a constructor like `Prng.SFC64(24, 11, 3)`.
-For more details take a look at the test file and the documentation in the docs directory.
+For more details take a look at the test file, the documentation in the source code, or https://mops.one/prng/docs.
 
 ### Build & test
 
