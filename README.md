@@ -57,6 +57,21 @@ rng2.init(seed);
 let seq2 : [Nat64] = [rng2.next(), rng2.next()];
 ```
 
+There are also two recommended Nat32 generators, SFC32a and SFC32b, used as follows.
+
+```
+import Prng "mo:prng";
+
+let seed : Nat32 = 0;
+
+let rng = Prng.SFC32a(); // or Prng.SFC32b()
+rng.init(seed);
+let seq : [Nat32] = [rng.next(), rng.next()];
+```
+
+For SFC the internal parameters of the generator can also be customized with a constructor like `Prng.SFC64(24, 11, 3)`.
+For more details take a look at the test file and the documentation in the docs directory.
+
 ### Build & test
 
 You need `moc` and `wasmtime` installed.
