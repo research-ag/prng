@@ -70,7 +70,7 @@ The benchmarking code can be found here: [canister-profiling](https://github.com
 
 ### Time
 
-Wasm instructios per invocation of `next()`.
+Wasm instructions per invocation of `next()`.
 
 |method|Seiran128|SFC64|SFC32|
 |---|---|---|---|
@@ -86,7 +86,7 @@ Heap allocation per invocation of `next()`.
 
 ## Copyright
 
-MR Research AG, 2023
+MR Research AG, 2023-24
 ## Authors
 
 Main author: react0r-com
