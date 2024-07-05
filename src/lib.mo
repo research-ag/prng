@@ -196,7 +196,7 @@ module {
     /// Example:
     /// ```motoko
     /// import Prng "mo:prng"; 
-    /// let rng = Prng.SFC32(); 
+    /// let rng = Prng.SFC32a(); 
     /// rng.init(0);
     /// ``` 
     public func init(seed : Nat32) = init3(seed, seed, seed);
