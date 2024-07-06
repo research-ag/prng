@@ -74,11 +74,11 @@ For more details take a look at the test file, the documentation in the source c
 
 ### Build & test
 
-You need `moc` and `wasmtime` installed.
-Then run:
+Run:
 ```
 git clone git@github.com:research-ag/prng.git
-make -C test
+cd prng
+mops test
 ```
 
 ## Benchmarks
