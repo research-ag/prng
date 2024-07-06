@@ -3,14 +3,14 @@
 /// The algorithms deliver deterministic statistical randomness,
 /// not cryptographic randomness.
 ///
-/// Algorithm 1: 128-bit Seiran PRNG\
+/// Algorithm 1: 128-bit Seiran PRNG  
 /// See: https://github.com/andanteyk/prng-seiran
 ///
-/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)\
+/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)  
 /// See: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
 ///
-/// Copyright: 2023 MR Research AG\
-/// Main author: react0r-com\
+/// Copyright: 2023 MR Research AG  
+/// Main author: react0r-com  
 /// Contributors: Timo Hanke (timohanke) 
 
 import { range } "mo:base/Iter";

@@ -32,12 +32,16 @@ You need `mops` installed. In your project directory run:
 mops add prng
 ```
 
-In the Motoko source file import the package as one of:
+In the Motoko source file import the package as:
 ```
 import Prng "mo:prng";
 ```
 
 ### Example
+
+The two most commonly used generators from this package are Seiran128 und SFC64a.
+They both produce Nat64 output values.
+SFC64a is compatible to numpy.
 
 ```
 import Prng "mo:prng";
@@ -46,35 +50,49 @@ let seed : Nat64 = 0;
 
 let rng = Prng.Seiran128();
 rng.init(seed);
-rng.next();
-rng.next();
+let seq : [Nat64] = [rng.next(), rng.next()];
 
-let rng2 = Prng.SFCa(); // SFCa is compatible to numpy
+let rng2 = Prng.SFC64a();
 rng2.init(seed);
-rng.next();
-rng.next();
+let seq2 : [Nat64] = [rng2.next(), rng2.next()];
 ```
+
+There are also two recommended Nat32 generators, SFC32a and SFC32b, used as follows.
+
+```
+import Prng "mo:prng";
+
+let seed : Nat32 = 0;
+
+let rng = Prng.SFC32a(); // or Prng.SFC32b()
+rng.init(seed);
+let seq : [Nat32] = [rng.next(), rng.next()];
+```
+
+For SFC the internal parameters of the generator can also be customized with a constructor like `Prng.SFC64(24, 11, 3)`.
+For more details take a look at the test file, the documentation in the source code, or https://mops.one/prng/docs.
 
 ### Build & test
 
-You need `moc` and `wasmtime` installed.
-Then run:
+Run:
 ```
 git clone git@github.com:research-ag/prng.git
-make -C test
+cd prng
+mops test
 ```
 
 ## Benchmarks
 
 The benchmarking code can be found here: [canister-profiling](https://github.com/research-ag/canister-profiling)
+The values below were measured with moc 0.11.1 and dfx 0.20.1.
 
 ### Time
 
-Wasm instructios per invocation of `next()`.
+Wasm instructions per invocation of `next()`.
 
 |method|Seiran128|SFC64|SFC32|
 |---|---|---|---|
-|next|251|377|253|
+|next|215|320|274|
 
 ### Memory
 
@@ -82,11 +100,11 @@ Heap allocation per invocation of `next()`.
  
 |method|Seiran128|SFC64|SFC32|
 |---|---|---|---|
-|next|36|48|8|
+|next|36|48|16|
 
 ## Copyright
 
-MR Research AG, 2023
+MR Research AG, 2023-24
 ## Authors
 
 Main author: react0r-com
