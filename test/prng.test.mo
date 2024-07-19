@@ -1,11 +1,12 @@
+import Prim "mo:prim";
+
 import Prng "../src";
-//import Debug "mo:base/Debug";
 
 // --- Seiran tests ---
 let prng = Prng.Seiran128();
 prng.init(401);
 
-//Debug.print("Testing first values");
+Prim.debugPrint("Testing first values");
 for (
   v in [
     0x8D4E3629D245305F : Nat64,
@@ -18,15 +19,15 @@ for (
   assert (v == n);
 };
 
-//Debug.print("Testing value after jump32");
+Prim.debugPrint("Testing value after jump32");
 prng.jump32();
 assert (prng.next() == 0x3F6239D7246826A9);
 
-//Debug.print("Testing value after jump64");
+Prim.debugPrint("Testing value after jump64");
 prng.jump64();
 assert (prng.next() == 0xD780EC14D59D2D33);
 
-//Debug.print("Testing value after jump96");
+Prim.debugPrint("Testing value after jump96");
 prng.jump96();
 assert (prng.next() == 0x7DA59A41DC8721F2);
 
@@ -35,7 +36,7 @@ assert (prng.next() == 0x7DA59A41DC8721F2);
 let prng1 = Prng.SFC64a();
 prng1.init_pre();
 
-//Debug.print("Testing SFC64 (default seed)");
+Prim.debugPrint("Testing SFC64 (default seed)");
 for (
   v in [
     0xC85C4D72435E6052 : Nat64,
@@ -51,7 +52,7 @@ for (
 let prng2 = Prng.SFC64a();
 prng2.init3(1, 2, 3);
 
-//Debug.print("Testing SFC64 (split seed)");
+Prim.debugPrint("Testing SFC64 (split seed)");
 for (
   v in [
     0x43F18723CBD74146 : Nat64,
@@ -67,7 +68,7 @@ for (
 let prng3 = Prng.SFC32a();
 prng3.init_pre();
 
-//Debug.print("Testing SFC32 (default seed)");
+Prim.debugPrint("Testing SFC32 (default seed)");
 for (
   v in [
     0xB1BE92EA : Nat32,
@@ -83,7 +84,7 @@ for (
 let prng4 = Prng.SFC32a();
 prng4.init3(1, 2, 3);
 
-//Debug.print("Testing SFC32 (split seed)");
+Prim.debugPrint("Testing SFC32 (split seed)");
 for (
   v in [
     0x736A3B41 : Nat32,
@@ -96,7 +97,7 @@ for (
   assert (v == n);
 };
 
-//Debug.print("Testing SFC64 (numpy)");
+Prim.debugPrint("Testing SFC64 (numpy)");
 // The seed values were created with numpy like this:
 //   import numpy
 //   ss = numpy.random.SeedSequence(0)
