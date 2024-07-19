@@ -83,6 +83,15 @@ mops test
 
 ## Benchmarks
 
+### Mops benchmark
+
+Run
+```
+mops bench --replica pocket-ic
+```
+
+### Canister profiling
+
 The benchmarking code can be found here: [canister-profiling](https://github.com/research-ag/canister-profiling)
 The values below were measured with moc 0.11.1 and dfx 0.20.1.
 
