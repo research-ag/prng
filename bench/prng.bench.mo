@@ -41,9 +41,9 @@ module {
       func(row, col) {
         let ?ri = Array.indexOf<Text>(row, rows, Text.equal) else Prim.trap("Cannot determine row: " # row);
         let ?n = Nat.fromText(col) else Prim.trap("Cannot parse N");
-        let method = methods[ri];
+        let next = methods[ri].next;
         for (i in Iter.range(1, n)) {
-          ignore method.next();
+          ignore next();
         };
       }
     );
