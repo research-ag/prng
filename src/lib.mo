@@ -13,8 +13,6 @@
 /// Main author: react0r-com  
 /// Contributors: Timo Hanke (timohanke) 
 
-import { range } "mo:base/Iter";
-
 module {
   /// Constructs a Seiran128 generator.
   ///
@@ -67,7 +65,8 @@ module {
 
       for (jp in jumppoly.vals()) {
         var w = jp;
-        for (_ in range(0, 63)) {
+        var i_ : Nat8 = 64;
+        while (i_ > 0) {
           if (w & 1 == 1) {
             t0 ^= a;
             t1 ^= b;
@@ -75,6 +74,7 @@ module {
 
           w >>= 1;
           ignore next();
+          i_ -%= 1;
         };
       };
 
@@ -148,7 +148,11 @@ module {
       c := seed3;
       d := 1;
 
-      for (_ in range(0, 11)) ignore next();
+      var i_ : Nat8 = 12;
+      while (i_ > 0) {
+        ignore next();
+        i_ -%= 1;
+      };
     };
 
     /// Returns one output and advances the PRNG's state
@@ -226,7 +230,11 @@ module {
       c := seed3;
       d := 1;
 
-      for (_ in range(0, 11)) ignore next();
+      var i_ : Nat8 = 12;
+      while (i_ > 0) {
+        ignore next();
+        i_ -%= 1;
+      };
     };
 
     /// Returns one output and advances the PRNG's state
