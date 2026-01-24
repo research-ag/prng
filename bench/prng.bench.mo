@@ -1,9 +1,9 @@
-import Array "mo:base/Array";
+import Array "mo:core/Array";
+import Nat "mo:core/Nat";
+import Runtime "mo:core/Runtime";
+import Text "mo:core/Text";
+
 import Bench "mo:bench";
-import Iter "mo:base/Iter";
-import Nat "mo:base/Nat";
-import Prim "mo:prim";
-import Text "mo:base/Text";
 
 import Prng "../src";
 
@@ -39,10 +39,10 @@ module {
 
     bench.runner(
       func(row, col) {
-        let ?ri = Array.indexOf<Text>(row, rows, Text.equal) else Prim.trap("Cannot determine row: " # row);
-        let ?n = Nat.fromText(col) else Prim.trap("Cannot parse N");
+        let ?ri = rows.indexOf(Text.equal, row) else Runtime.trap("Cannot determine row: " # row);
+        let ?n = Nat.fromText(col) else Runtime.trap("Cannot parse N");
         let next = methods[ri].next;
-        for (i in Iter.range(1, n)) {
+        for (i in Nat.range(0, n)) {
           ignore next();
         };
       }
