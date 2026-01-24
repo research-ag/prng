@@ -2,7 +2,7 @@
 
 ## 0.0.7
 
-* Update dev-dependencies 
+* Update dev-dependencies
 
 ## 0.0.6
 
