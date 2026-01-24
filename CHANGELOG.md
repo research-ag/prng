@@ -1,5 +1,9 @@
 # Prng changelog
 
+## 0.0.7
+
+* Update bench dependency
+
 ## 0.0.6
 
 * Remove base dependency entirely
