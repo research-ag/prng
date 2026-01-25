@@ -7,8 +7,7 @@ keywords = [ "rand", "random", "rng", "sfc", "seiran" ]
 license = "Apache-2.0"
 
 [dev-dependencies]
-bench = "2.0.0"
-core = "2.0.0"
+bench = "2.0.1"
 
 [requirements]
 moc = "0.7.0"

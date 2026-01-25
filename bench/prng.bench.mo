@@ -1,35 +1,14 @@
-import Array "mo:core/Array";
-import Nat "mo:core/Nat";
-import Runtime "mo:core/Runtime";
-import Text "mo:core/Text";
-
-import Bench "mo:bench";
-
+import Bench "helper";
 import Prng "../src";
 
 module {
-
-  public func init() : Bench.Bench {
-    let bench = Bench.Bench();
-
-    bench.name("Prng");
-    bench.description("Benchmark N `next` calls for different PRNG methods");
-
-    let rows = [
-      "Seiran128",
-      "SFC64",
-      "SFC32",
-    ];
-
-    let cols = [
-      "10",
-      "100",
-      "1000",
-      "10000",
-    ];
-
-    bench.rows(rows);
-    bench.cols(cols);
+  public func init() : Bench.V1 {
+    let schema : Bench.Schema = {
+      name = "Prng";
+      description = "Benchmark N `next` calls for different PRNGs";
+      rows = ["Seiran128", "SFC64", "SFC32"];
+      cols = ["10", "100", "1000", "10000"];
+    };
 
     let methods : [{ next : () -> Any }] = [
       Prng.Seiran128(),
@@ -37,17 +16,18 @@ module {
       Prng.SFC32a(),
     ];
 
-    bench.runner(
-      func(row, col) {
-        let ?ri = rows.indexOf(Text.equal, row) else Runtime.trap("Cannot determine row: " # row);
-        let ?n = Nat.fromText(col) else Runtime.trap("Cannot parse N");
-        let next = methods[ri].next;
-        for (i in Nat.range(0, n)) {
-          ignore next();
-        };
-      }
-    );
+    let ns : [Nat16] = [10, 100, 1000, 10000];
 
-    bench;
+    func run(ri : Nat, ci : Nat) {
+      let n = ns[ci];
+      let next = methods[ri].next;
+      var i : Nat16 = 0;
+      while (i < n) {
+        ignore next();
+        i +%= 1;
+      };
+    };
+
+    Bench.V1(schema, run);
   };
 };
