@@ -2,7 +2,8 @@
 
 ## 0.0.9
 
-* Simplify bench code (needs mops >= 2.1.0)
+* Use bench-helper package
+* Simplify bench code
 
 ## 0.0.8
 
