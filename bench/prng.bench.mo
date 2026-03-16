@@ -1,4 +1,4 @@
-import Bench "helper";
+import Bench "mo:bench-helper";
 import Prng "../src";
 
 module {
@@ -10,17 +10,17 @@ module {
       cols = ["10", "100", "1000", "10000"];
     };
 
-    let methods : [{ next : () -> Any }] = [
+    let rngs : [{ next : () -> Any }] = [
       Prng.Seiran128(),
       Prng.SFC64a(),
       Prng.SFC32a(),
     ];
 
     let ns : [Nat16] = [10, 100, 1000, 10000];
-
-    func run(ri : Nat, ci : Nat) {
+ 
+    let run : Bench.Runner = func(ri, ci) {
       let n = ns[ci];
-      let next = methods[ri].next;
+      let next = rngs[ri].next;
       var i : Nat16 = 0;
       while (i < n) {
         ignore next();
