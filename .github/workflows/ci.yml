@@ -1,0 +1,38 @@
+name: CI
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    types: [synchronize, opened, reopened, ready_for_review, unlabeled]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Install mops
+        uses: caffeinelabs/setup-mops@v1
+
+      - name: Make sure moc and pocket-ic are installed
+        run: |
+          mops toolchain bin moc || mops toolchain use moc latest
+          mops toolchain bin pocket-ic || mops toolchain use pocket-ic latest
+
+      - name: Show versions
+        run: |
+          mops --version
+          $(mops toolchain bin moc) --version
+
+      - name: Run tests
+        run: mops test
+
+      - name: Run benchmarks
+        run: mops bench
