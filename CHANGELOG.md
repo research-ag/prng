@@ -1,13 +1,5 @@
 # Prng changelog
 
-## [0.0.10] - 2026-05-08
-
-### Changed
-
-- Updated `core` from `2.1.0` to `2.5.0`.
-- Updated `bench-helper` from `0.0.2` to `0.0.3`.
-- Updated `[requirements] moc` from `0.7.0` to `1.6.0`.
-
 ## 0.0.9
 
 - Use bench-helper package
