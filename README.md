@@ -30,13 +30,13 @@ For updates, help, questions, feedback and other requests related to this packag
 
 You need `mops` installed. In your project directory run:
 
-```
+```bash
 mops add prng
 ```
 
 In the Motoko source file import the package as:
 
-```
+```motoko
 import Prng "mo:prng";
 ```
 
@@ -46,7 +46,7 @@ The two most commonly used generators from this package are Seiran128 und SFC64a
 They both produce Nat64 output values.
 SFC64a is compatible to numpy.
 
-```
+```motoko
 import Prng "mo:prng";
 
 let seed : Nat64 = 0;
@@ -62,7 +62,7 @@ let seq2 : [Nat64] = [rng2.next(), rng2.next()];
 
 There are also two recommended Nat32 generators, SFC32a and SFC32b, used as follows.
 
-```
+```motoko
 import Prng "mo:prng";
 
 let seed : Nat32 = 0;
@@ -79,7 +79,7 @@ For more details take a look at the test file, the documentation in the source c
 
 Run:
 
-```
+```bash
 git clone git@github.com:research-ag/prng.git
 cd prng
 mops test
@@ -89,7 +89,7 @@ mops test
 
 To format the code, run:
 
-```
+```bash
 npx -y prettier --plugin prettier-plugin-motoko --write '**/*.{mo,json,md}'
 ```
 
@@ -99,7 +99,7 @@ npx -y prettier --plugin prettier-plugin-motoko --write '**/*.{mo,json,md}'
 
 Run
 
-```
+```bash
 mops bench --replica pocket-ic
 ```
 

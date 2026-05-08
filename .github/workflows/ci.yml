@@ -35,4 +35,4 @@ jobs:
         run: mops test
 
       - name: Run benchmarks
-        run: mops bench
+        run: mops bench --replica pocket-ic
