@@ -1,6 +1,6 @@
 [package]
 name = "prng"
-version = "0.0.10"
+version = "0.0.9"
 description = "Statistical pseudo-random number generators"
 repository = "https://github.com/research-ag/prng"
 keywords = [ "rand", "random", "rng", "sfc", "seiran" ]
