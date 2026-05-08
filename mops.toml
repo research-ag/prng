@@ -1,17 +1,17 @@
 [package]
 name = "prng"
-version = "0.0.9"
+version = "0.0.10"
 description = "Statistical pseudo-random number generators"
 repository = "https://github.com/research-ag/prng"
 keywords = [ "rand", "random", "rng", "sfc", "seiran" ]
 license = "Apache-2.0"
 
 [dev-dependencies]
-core = "2.1.0"
-bench-helper = "0.0.2"
+core = "2.5.0"
+bench-helper = "0.0.3"
 
 [requirements]
-moc = "0.7.0"
+moc = "1.6.0"
 
 [toolchain]
-moc = "1.3.0"
+moc = "1.7.0"

@@ -17,7 +17,7 @@ module {
     ];
 
     let ns : [Nat16] = [10, 100, 1000, 10000];
- 
+
     let run : Bench.Runner = func(ri, ci) {
       let n = ns[ci];
       let next = rngs[ri].next;
