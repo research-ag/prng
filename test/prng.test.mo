@@ -1,9 +1,9 @@
 import Prim "mo:prim";
 
-import Prng "../src";
+import { Seiran128; SFC64; SFC32 } "../src";
 
 // --- Seiran tests ---
-let prng = Prng.Seiran128();
+let prng = Seiran128.new();
 prng.init(401);
 
 Prim.debugPrint("Testing first values");
@@ -33,7 +33,7 @@ assert (prng.next() == 0x7DA59A41DC8721F2);
 
 // --- SFC tests ---
 
-let prng1 = Prng.SFC64a();
+let prng1 = SFC64.SFC64a();
 prng1.init_pre();
 
 Prim.debugPrint("Testing SFC64 (default seed)");
@@ -49,7 +49,7 @@ for (
   assert (v == n);
 };
 
-let prng2 = Prng.SFC64a();
+let prng2 = SFC64.SFC64a();
 prng2.init3(1, 2, 3);
 
 Prim.debugPrint("Testing SFC64 (split seed)");
@@ -65,7 +65,7 @@ for (
   assert (v == n);
 };
 
-let prng3 = Prng.SFC32a();
+let prng3 = SFC32.SFC32a();
 prng3.init_pre();
 
 Prim.debugPrint("Testing SFC32 (default seed)");
@@ -81,7 +81,7 @@ for (
   assert (v == n);
 };
 
-let prng4 = Prng.SFC32a();
+let prng4 = SFC32.SFC32a();
 prng4.init3(1, 2, 3);
 
 Prim.debugPrint("Testing SFC32 (split seed)");
@@ -109,6 +109,6 @@ Prim.debugPrint("Testing SFC64 (numpy)");
 //   bg.random_raw(2)
 // produces output:
 //   array([10490465040999277362,  4331856608414834465], dtype=uint64)
-let c = Prng.SFC64(24, 11, 3);
+let c = SFC64.new(24, 11, 3);
 c.init3(15793235383387715774, 12390638538380655177, 2361836109651742017);
 assert ([c.next(), c.next()] == [10490465040999277362, 4331856608414834465]);

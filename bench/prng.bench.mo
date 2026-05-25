@@ -1,5 +1,5 @@
 import Bench "mo:bench-helper";
-import Prng "../src";
+import { Seiran128; SFC64; SFC32 } "../src";
 
 module {
   public func init() : Bench.V1 {
@@ -10,10 +10,13 @@ module {
       cols = ["10", "100", "1000", "10000"];
     };
 
+    let seiran = Seiran128.new();
+    let sfc64 = SFC64.SFC64a();
+    let sfc32 = SFC32.SFC32a();
     let rngs : [{ next : () -> Any }] = [
-      Prng.Seiran128(),
-      Prng.SFC64a(),
-      Prng.SFC32a(),
+      { next = func() : Any = seiran.next() },
+      { next = func() : Any = sfc64.next() },
+      { next = func() : Any = sfc32.next() },
     ];
 
     let ns : [Nat16] = [10, 100, 1000, 10000];
