@@ -3,8 +3,7 @@ import Prim "mo:prim";
 import { Seiran128; SFC64; SFC32 } "../src";
 
 // --- Seiran tests ---
-let prng = Seiran128.new();
-prng.init(401);
+let prng = Seiran128.new(401);
 
 Prim.debugPrint("Testing first values");
 for (
@@ -34,7 +33,6 @@ assert (prng.next() == 0x7DA59A41DC8721F2);
 // --- SFC tests ---
 
 let prng1 = SFC64.SFC64a();
-prng1.init_pre();
 
 Prim.debugPrint("Testing SFC64 (default seed)");
 for (
@@ -66,7 +64,6 @@ for (
 };
 
 let prng3 = SFC32.SFC32a();
-prng3.init_pre();
 
 Prim.debugPrint("Testing SFC32 (default seed)");
 for (

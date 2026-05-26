@@ -20,6 +20,9 @@ module Seiran128 {
     var b : Nat64;
   };
 
+  /// Default seed for Seiran128 generators.
+  public let defaultSeiran128Seed : Nat64 = 0;
+
   /// Constructs a Seiran128 generator.
   ///
   /// Example:
@@ -27,7 +30,11 @@ module Seiran128 {
   /// import Prng "mo:prng";
   /// let rng = Prng.Seiran128.new();
   /// ```
-  public func new() : Seiran128 = { var a = 0; var b = 0 };
+  public func new(seed : (implicit : (defaultSeiran128Seed : Nat64)) : Nat64) : Seiran128 {
+    let prng : Seiran128 = { var a = 0; var b = 0 };
+    prng.init(seed);
+    prng;
+  };
 
   /// Initializes the PRNG state with a particular seed.
   ///
@@ -37,7 +44,7 @@ module Seiran128 {
   /// let rng = Prng.Seiran128.new();
   /// rng.init(0);
   /// ```
-  public func init(self : Seiran128, seed : Nat64) {
+  public func init(self : Seiran128, seed : (implicit : (defaultSeiran128Seed : Nat64))) {
     self.a := seed *% 6364136223846793005 +% 1442695040888963407;
     self.b := self.a *% 6364136223846793005 +% 1442695040888963407;
   };
@@ -106,6 +113,9 @@ module SFC64 {
     var d : Nat64;
   };
 
+  /// Default seed for SFC64 generators.
+  public let defaultSFC64Seed : Nat64 = 0xcafef00dbeef5eed;
+
   /// Constructs an SFC 64-bit generator.
   /// The recommended constructor arguments are: 24, 11, 3.
   ///
@@ -120,14 +130,18 @@ module SFC64 {
   /// import Prng "mo:prng";
   /// let rng = Prng.SFC64.SFC64a();
   /// ```
-  public func new(p : Nat64, q : Nat64, r : Nat64) : SFC64 = {
-    p;
-    q;
-    r;
-    var a = 0;
-    var b = 0;
-    var c = 0;
-    var d = 0;
+  public func new(p : Nat64, q : Nat64, r : Nat64, seed : (implicit : (defaultSFC64Seed : Nat64))) : SFC64 {
+    let prng : SFC64 = {
+      p;
+      q;
+      r;
+      var a = 0;
+      var b = 0;
+      var c = 0;
+      var d = 0;
+    };
+    prng.init(seed);
+    prng;
   };
 
   /// Initializes the PRNG state with a particular seed
@@ -138,7 +152,7 @@ module SFC64 {
   /// let rng = Prng.SFC64.SFC64a();
   /// rng.init(0);
   /// ```
-  public func init(self : SFC64, seed : Nat64) = init3(self, seed, seed, seed);
+  public func init(self : SFC64, seed : (implicit : (defaultSFC64Seed : Nat64))) = init3(self, seed, seed, seed);
 
   /// Initializes the PRNG state with a hardcoded seed.
   /// No argument is required.
@@ -149,7 +163,7 @@ module SFC64 {
   /// let rng = Prng.SFC64.SFC64a();
   /// rng.init_pre();
   /// ```
-  public func init_pre(self : SFC64) = init(self, 0xcafef00dbeef5eed);
+  //public func init_pre(self : SFC64) = init(self, 0xcafef00dbeef5eed);
 
   /// Initializes the PRNG state with three state variables
   ///
@@ -191,10 +205,10 @@ module SFC64 {
 
   /// SFC64a is the same as numpy.
   /// See: [sfc64_next()](https:///github.com/numpy/numpy/blob/b6d372c25fab5033b828dd9de551eb0b7fa55800/numpy/random/src/sfc64/sfc64.h#L28)
-  public func SFC64a() : SFC64 = new(24, 11, 3);
+  public func SFC64a(seed : (implicit : (defaultSFC64Seed : Nat64))) : SFC64 = new(24, 11, 3, seed);
 
   /// Not recommended. Use `SFC64a` version.
-  public func SFC64b() : SFC64 = new(25, 12, 3);
+  public func SFC64b(seed : (implicit : (defaultSFC64Seed : Nat64))) : SFC64 = new(25, 12, 3, seed);
 };
 
 module SFC32 {
@@ -208,6 +222,9 @@ module SFC32 {
     var c : Nat32;
     var d : Nat32;
   };
+
+  /// Default seed for SFC32 generators.
+  public let defaultSFC32Seed : Nat32 = 0xbeef5eed;
 
   /// Constructs an SFC 32-bit generator.
   /// The recommended constructor arguments are:
@@ -225,14 +242,18 @@ module SFC32 {
   /// import Prng "mo:prng";
   /// let rng = Prng.SFC32.SFC32a();
   /// ```
-  public func new(p : Nat32, q : Nat32, r : Nat32) : SFC32 = {
-    p;
-    q;
-    r;
-    var a = 0;
-    var b = 0;
-    var c = 0;
-    var d = 0;
+  public func new(p : Nat32, q : Nat32, r : Nat32, seed : (implicit : (defaultSFC32Seed : Nat32))) : SFC32 {
+    let prng : SFC32 = {
+      p;
+      q;
+      r;
+      var a = 0;
+      var b = 0;
+      var c = 0;
+      var d = 0;
+    };
+    prng.init(seed);
+    prng;
   };
 
   /// Initializes the PRNG state with a particular seed
@@ -243,7 +264,7 @@ module SFC32 {
   /// let rng = Prng.SFC32.SFC32a();
   /// rng.init(0);
   /// ```
-  public func init(self : SFC32, seed : Nat32) = init3(self, seed, seed, seed);
+  public func init(self : SFC32, seed : (implicit : (defaultSFC32Seed : Nat32))) = init3(self, seed, seed, seed);
 
   /// Initializes the PRNG state with a hardcoded seed.
   /// No argument is required.
@@ -254,7 +275,7 @@ module SFC32 {
   /// let rng = Prng.SFC32.SFC32a();
   /// rng.init_pre();
   /// ```
-  public func init_pre(self : SFC32) = init(self, 0xbeef5eed);
+  //public func init_pre(self : SFC32) = init(self, 0xbeef5eed);
 
   /// Initializes the PRNG state with three seeds
   ///
@@ -295,11 +316,11 @@ module SFC32 {
   };
 
   /// Ok to use
-  public func SFC32a() : SFC32 = new(21, 9, 3);
+  public func SFC32a(seed : (implicit : (defaultSFC32Seed : Nat32))) : SFC32 = new(21, 9, 3, seed);
 
   /// Ok to use
-  public func SFC32b() : SFC32 = new(15, 8, 3);
+  public func SFC32b(seed : (implicit : (defaultSFC32Seed : Nat32))) : SFC32 = new(15, 8, 3, seed);
 
   /// Not recommended. Use `SFC32a` or `SFC32b` version.
-  public func SFC32c() : SFC32 = new(25, 8, 3);
+  public func SFC32c(seed : (implicit : (defaultSFC32Seed : Nat32))) : SFC32 = new(25, 8, 3, seed);
 };
