@@ -10,7 +10,7 @@ module {
       cols = ["10", "100", "1000", "10000"];
     };
 
-    let seiran = Seiran128.new();
+    let seiran = Seiran128.new(0);
     let sfc64 = SFC64.SFC64a();
     let sfc32 = SFC32.SFC32a();
     let rngs : [{ next : () -> Any }] = [
