@@ -155,17 +155,6 @@ module {
     /// ```
     public func init(self : SFC64, seed : (implicit : (defaultSFC64Seed : Nat64))) = init3(self, seed, seed, seed);
 
-    /// Initializes the PRNG state with a hardcoded seed.
-    /// No argument is required.
-    ///
-    /// Example:
-    /// ```motoko
-    /// import Prng "mo:prng";
-    /// let rng = Prng.SFC64.SFC64a();
-    /// rng.init_pre();
-    /// ```
-    //public func init_pre(self : SFC64) = init(self, 0xcafef00dbeef5eed);
-
     /// Initializes the PRNG state with three state variables
     ///
     /// Example:
@@ -266,17 +255,6 @@ module {
     /// rng.init(0);
     /// ```
     public func init(self : SFC32, seed : (implicit : (defaultSFC32Seed : Nat32))) = init3(self, seed, seed, seed);
-
-    /// Initializes the PRNG state with a hardcoded seed.
-    /// No argument is required.
-    ///
-    /// Example:
-    /// ```motoko
-    /// import Prng "mo:prng";
-    /// let rng = Prng.SFC32.SFC32a();
-    /// rng.init_pre();
-    /// ```
-    //public func init_pre(self : SFC32) = init(self, 0xbeef5eed);
 
     /// Initializes the PRNG state with three seeds
     ///
