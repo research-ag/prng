@@ -31,7 +31,7 @@ module {
     /// import Prng "mo:prng";
     /// let rng = Prng.Seiran128.new();
     /// ```
-    public func new(seed : (implicit : (defaultSeiran128Seed : Nat64)) : Nat64) : Seiran128 {
+    public func new(seed : (implicit : (defaultSeiran128Seed : Nat64))) : Seiran128 {
       let prng : Seiran128 = { var a = 0; var b = 0 };
       prng.init(seed);
       prng;
