@@ -1,5 +1,9 @@
 # Prng changelog
 
+## 0.2.0
+
+- Allocation free version
+
 ## 0.1.1
 
 - Add documentation
