@@ -97,7 +97,7 @@ module Seiran128 {
 
     let na = a ^ (b <<> 29);
     let nb = a ^ (b << 9);
- 
+
     let (a0, a1, a2, a3, a4, a5, a6, a7) = Prim.explodeNat64(na);
     let (b0, b1, b2, b3, b4, b5, b6, b7) = Prim.explodeNat64(nb);
     self[0] := nat8To16(a6) << 8 | nat8To16(a7);

@@ -2,7 +2,9 @@
 
 ## 0.2.0
 
-- Allocation free version
+- Allocation-free version
+- `next()` only allocates for the returned value
+- **Breaking:** State representation changed
 
 ## 0.1.1
 

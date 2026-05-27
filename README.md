@@ -133,7 +133,7 @@ Heap allocation per invocation of `next()`.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 12        | 12    | 4    |
+| next   | 12        | 12    | 4     |
 
 ## Copyright
 
