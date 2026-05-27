@@ -38,6 +38,7 @@ In the Motoko source file import the generators you need:
 
 ```motoko
 import { Seiran128; SFC64; SFC32 } "mo:prng";
+
 ```
 
 (Importing the modules directly — e.g. `import Seiran128 "mo:prng/Seiran128"` — works too and is required for the `rng.next()` method-call syntax to resolve.)
@@ -58,6 +59,7 @@ let seq : [Nat64] = [rng.next(), rng.next()];
 
 let rng2 = SFC64.SFC64a(seed);
 let seq2 : [Nat64] = [rng2.next(), rng2.next()];
+
 ```
 
 The seed argument is optional; omitting it uses each algorithm's default seed:
@@ -65,8 +67,9 @@ The seed argument is optional; omitting it uses each algorithm's default seed:
 ```motoko
 import { Seiran128; SFC64 } "mo:prng";
 
-let rng = Seiran128.new();   // uses defaultSeiran128Seed
-let rng2 = SFC64.SFC64a();   // uses defaultSFC64Seed
+let rng = Seiran128.new(); // uses defaultSeiran128Seed
+let rng2 = SFC64.SFC64a(); // uses defaultSFC64Seed
+
 ```
 
 There are also two recommended Nat32 generators, SFC32a and SFC32b, used as follows.
@@ -78,6 +81,7 @@ let seed : Nat32 = 0;
 
 let rng = SFC32.SFC32a(seed); // or SFC32.SFC32b(seed)
 let seq : [Nat32] = [rng.next(), rng.next()];
+
 ```
 
 For SFC the internal parameters of the generator can also be customized with a constructor like `SFC64.new(24, 11, 3, seed)`.
