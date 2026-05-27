@@ -112,7 +112,7 @@ module SFC64 {
   };
 
   /// SFC64a is the same as numpy.
-  /// See: [sfc64_next()](https:///github.com/numpy/numpy/blob/b6d372c25fab5033b828dd9de551eb0b7fa55800/numpy/random/src/sfc64/sfc64.h#L28)
+  /// See: [sfc64_next()](https://github.com/numpy/numpy/blob/b6d372c25fab5033b828dd9de551eb0b7fa55800/numpy/random/src/sfc64/sfc64.h#L28)
   public func SFC64a(seed : (implicit : (defaultSFC64Seed : Nat64))) : SFC64 = new(24, 11, 3, seed);
 
   /// Not recommended. Use `SFC64a` version.
