@@ -15,4 +15,3 @@ moc = "1.0.0"
 
 [toolchain]
 moc = "1.8.2"
-pocket-ic = "9.0.3"

@@ -33,11 +33,11 @@ jobs:
       - name: Install dependencies
         run: mops install
 
-      - name: Make sure pocket-ic is installed
-        run: mops toolchain init && mops toolchain bin pocket-ic
-
       - name: Run tests
         run: mops test
+
+      - name: Install dfx
+        uses: dfinity/setup-dfx@main
 
       - name: Run benchmarks
         run: mops bench
