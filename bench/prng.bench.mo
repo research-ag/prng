@@ -10,20 +10,24 @@ module {
       cols = ["10", "100", "1000", "10000"];
     };
 
-    let seiran = Seiran128.new();
-    let sfc64 = SFC64.SFC64a();
-    let sfc32 = SFC32.SFC32a();
-    let rngs : [{ next : () -> Any }] = [
-      { next = func() : Any = seiran.next() },
-      { next = func() : Any = sfc64.next() },
-      { next = func() : Any = sfc32.next() },
+    let seiran128 = Prng.Seiran128();
+    seiran128.init(0);
+    let sfc64a = Prng.SFC64a();
+    sfc64a.init_pre();
+    let sfc32a = Prng.SFC32a();
+    sfc32a.init_pre();
+
+    let functions : [() -> Any] = [
+      seiran128.next,
+      sfc64a.next,
+      sfc32a.next,
     ];
 
     let ns : [Nat16] = [10, 100, 1000, 10000];
 
     let run : Bench.Runner = func(ri, ci) {
       let n = ns[ci];
-      let next = rngs[ri].next;
+      let next = functions[ri];
       var i : Nat16 = 0;
       while (i < n) {
         ignore next();

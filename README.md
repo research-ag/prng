@@ -117,7 +117,11 @@ mops bench
 
 ### Profiling
 
+<<<<<<< HEAD
 The benchmarking was done with `mops bench --replica dfx`.
+=======
+The benchmarks were produced with `mops bench --replica dfx`.
+>>>>>>> main
 
 ### Time
 
@@ -125,7 +129,11 @@ Wasm instructions per invocation of `next()`.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
+<<<<<<< HEAD
 | next   | 253       | 525   | 475   |
+=======
+| next   | 190       | 288   | 238   |
+>>>>>>> main
 
 ### Memory
 
