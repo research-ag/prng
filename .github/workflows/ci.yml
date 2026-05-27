@@ -1,15 +1,15 @@
 name: CI
+
 on:
   push:
     branches: [main, master]
   pull_request:
-    types: [synchronize, opened, reopened, ready_for_review, unlabeled]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   test:
     name: Tests and Benchmarks
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -33,14 +33,14 @@ jobs:
       - name: Install dependencies
         run: mops install
 
-      - name: Make sure pocket-ic is installed
-        run: mops toolchain init && mops toolchain bin pocket-ic
-
       - name: Run tests
         run: mops test
 
+      - name: Install dfx
+        uses: dfinity/setup-dfx@main
+
       - name: Run benchmarks
-        run: mops bench --replica pocket-ic
+        run: mops bench
 
   fmt:
     name: Formatting Check

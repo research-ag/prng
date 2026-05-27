@@ -1,5 +1,5 @@
 import Bench "mo:bench-helper";
-import Prng "../src";
+import { Seiran128; SFC64; SFC32 } "../src";
 
 module {
   public func init() : Bench.V1 {
@@ -10,28 +10,37 @@ module {
       cols = ["10", "100", "1000", "10000"];
     };
 
-    let seiran128 = Prng.Seiran128();
-    seiran128.init(0);
-    let sfc64a = Prng.SFC64a();
-    sfc64a.init_pre();
-    let sfc32a = Prng.SFC32a();
-    sfc32a.init_pre();
-
-    let functions : [() -> Any] = [
-      seiran128.next,
-      sfc64a.next,
-      sfc32a.next,
-    ];
+    let seiran = Seiran128.new();
+    let sfc64 = SFC64.SFC64a();
+    let sfc32 = SFC32.SFC32a();
 
     let ns : [Nat16] = [10, 100, 1000, 10000];
 
     let run : Bench.Runner = func(ri, ci) {
       let n = ns[ci];
-      let next = functions[ri];
-      var i : Nat16 = 0;
-      while (i < n) {
-        ignore next();
-        i +%= 1;
+      switch (ri) {
+        case (0) {
+          var i : Nat16 = 0;
+          while (i < n) {
+            ignore Seiran128.next(seiran);
+            i +%= 1;
+          };
+        };
+        case (1) {
+          var i : Nat16 = 0;
+          while (i < n) {
+            ignore SFC64.next(sfc64);
+            i +%= 1;
+          };
+        };
+        case (2) {
+          var i : Nat16 = 0;
+          while (i < n) {
+            ignore SFC32.next(sfc32);
+            i +%= 1;
+          };
+        };
+        case (_) assert false;
       };
     };
 

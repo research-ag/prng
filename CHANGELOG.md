@@ -1,5 +1,16 @@
 # Prng changelog
 
+## 0.1.1
+
+- Add documentation
+- Fix benchmark accuracy
+
+## 0.1.0
+
+- Rewrite of the API
+- Use static records for easier persistency
+- Require `moc 1.0.0` or higher
+
 ## 0.0.10
 
 - Fix benchmark accuracy
