@@ -1,13 +1,18 @@
-/// Collection of pseudo-random number generators
+/// SFC64 — Chris Doty-Humphrey's Small Fast Chaotic 64-bit PRNG.
 ///
-/// The algorithms deliver deterministic statistical randomness,
-/// not cryptographic randomness.
+/// A deterministic statistical pseudo-random number generator with 256 bits
+/// of state (four `Nat64` words) and three tuning parameters `(p, q, r)`,
+/// producing `Nat64` output values. The convenience constructor `SFC64a`
+/// uses the parameter set `(24, 11, 3)`, which matches numpy's
+/// `numpy.random.SFC64`; `SFC64b` uses `(25, 12, 3)`.
 ///
-/// Algorithm 1: 128-bit Seiran PRNG
-/// See: https://github.com/andanteyk/prng-seiran
+/// Not cryptographically secure.
 ///
-/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)
-/// See: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
+/// Reference: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
+///
+/// ```motoko name=import
+/// import SFC64 "mo:prng/SFC64";
+/// ```
 ///
 /// Copyright: 2023-26 MR Research AG
 /// Main author: Timo Hanke (timohanke)

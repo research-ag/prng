@@ -1,13 +1,19 @@
-/// Collection of pseudo-random number generators
+/// SFC32 — Chris Doty-Humphrey's Small Fast Chaotic 32-bit PRNG.
 ///
-/// The algorithms deliver deterministic statistical randomness,
-/// not cryptographic randomness.
+/// A deterministic statistical pseudo-random number generator with 128 bits
+/// of state (four `Nat32` words) and three tuning parameters `(p, q, r)`,
+/// producing `Nat32` output values. Two parameter sets are recommended:
+/// `SFC32a` uses `(21, 9, 3)` and `SFC32b` uses `(15, 8, 3)`. A third variant
+/// `SFC32c` (parameters `(25, 8, 3)`) is exposed for completeness but is not
+/// recommended for general use.
 ///
-/// Algorithm 1: 128-bit Seiran PRNG
-/// See: https://github.com/andanteyk/prng-seiran
+/// Not cryptographically secure.
 ///
-/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)
-/// See: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
+/// Reference: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
+///
+/// ```motoko name=import
+/// import SFC32 "mo:prng/SFC32";
+/// ```
 ///
 /// Copyright: 2023-26 MR Research AG
 /// Main author: Timo Hanke (timohanke)

@@ -1,13 +1,18 @@
-/// Collection of pseudo-random number generators
+/// 128-bit Seiran PRNG.
 ///
-/// The algorithms deliver deterministic statistical randomness,
-/// not cryptographic randomness.
+/// A deterministic statistical pseudo-random number generator with 128 bits
+/// of state, producing `Nat64` output values. Provides constant-time `jump32`,
+/// `jump64`, and `jump96` operations for advancing the state by `2^32`,
+/// `2^64`, and `2^96` steps respectively — useful for splitting a stream
+/// across parallel workers.
 ///
-/// Algorithm 1: 128-bit Seiran PRNG
-/// See: https://github.com/andanteyk/prng-seiran
+/// Not cryptographically secure.
 ///
-/// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)
-/// See: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
+/// Reference: https://github.com/andanteyk/prng-seiran
+///
+/// ```motoko name=import
+/// import Seiran128 "mo:prng/Seiran128";
+/// ```
 ///
 /// Copyright: 2023-26 MR Research AG
 /// Main author: Timo Hanke (timohanke)
@@ -15,10 +20,7 @@
 
 module Seiran128 {
   /// State of a Seiran128 generator.
-  public type Seiran128 = {
-    var a : Nat64;
-    var b : Nat64;
-  };
+  public type Seiran128 = [var Nat64];
 
   /// Default seed for Seiran128 generators.
   public let defaultSeiran128Seed : Nat64 = 0;
@@ -31,7 +33,7 @@ module Seiran128 {
   /// let rng = Prng.Seiran128.new();
   /// ```
   public func new(seed : (implicit : (defaultSeiran128Seed : Nat64))) : Seiran128 {
-    let prng : Seiran128 = { var a = 0; var b = 0 };
+    let prng : Seiran128 = [var 0, 0];
     prng.init(seed);
     prng;
   };
@@ -45,8 +47,8 @@ module Seiran128 {
   /// rng.init(0);
   /// ```
   public func init(self : Seiran128, seed : (implicit : (defaultSeiran128Seed : Nat64))) {
-    self.a := seed *% 6364136223846793005 +% 1442695040888963407;
-    self.b := self.a *% 6364136223846793005 +% 1442695040888963407;
+    self[0] := seed *% 6364136223846793005 +% 1442695040888963407;
+    self[1] := self[0] *% 6364136223846793005 +% 1442695040888963407;
   };
 
   /// Returns one output and advances the PRNG's state.
@@ -58,13 +60,13 @@ module Seiran128 {
   /// rng.next(); // -> 11_505_474_185_568_172_049
   /// ```
   public func next(self : Seiran128) : Nat64 {
-    let a_ = self.a;
-    let b_ = self.b;
+    let a_ = self[0];
+    let b_ = self[1];
 
     let result = (((a_ +% b_) *% 9) <<> 29) +% a_;
 
-    self.a := a_ ^ (b_ <<> 29);
-    self.b := a_ ^ (b_ << 9);
+    self[0] := a_ ^ (b_ <<> 29);
+    self[1] := a_ ^ (b_ << 9);
 
     result;
   };
@@ -79,8 +81,8 @@ module Seiran128 {
       var i_ : Nat8 = 64;
       while (i_ > 0) {
         if (w & 1 == 1) {
-          t0 ^= self.a;
-          t1 ^= self.b;
+          t0 ^= self[0];
+          t1 ^= self[1];
         };
 
         w >>= 1;
@@ -89,8 +91,8 @@ module Seiran128 {
       };
     };
 
-    self.a := t0;
-    self.b := t1;
+    self[0] := t0;
+    self[1] := t1;
   };
 
   /// Advances the state 2^32 times.
