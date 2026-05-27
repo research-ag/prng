@@ -20,15 +20,8 @@
 
 module SFC64 {
   /// State of an SFC 64-bit generator.
-  public type SFC64 = {
-    p : Nat64;
-    q : Nat64;
-    r : Nat64;
-    var a : Nat64;
-    var b : Nat64;
-    var c : Nat64;
-    var d : Nat64;
-  };
+  /// Layout: `[a, b, c, d, p, q, r]`
+  public type SFC64 = [var Nat64];
 
   /// Default seed for SFC64 generators.
   public let defaultSFC64Seed : Nat64 = 0xcafef00dbeef5eed;
@@ -48,15 +41,7 @@ module SFC64 {
   /// let rng = Prng.SFC64.SFC64a();
   /// ```
   public func new(p : Nat64, q : Nat64, r : Nat64, seed : (implicit : (defaultSFC64Seed : Nat64))) : SFC64 {
-    let prng : SFC64 = {
-      p;
-      q;
-      r;
-      var a = 0;
-      var b = 0;
-      var c = 0;
-      var d = 0;
-    };
+    let prng : SFC64 = [var 0, 0, 0, 0, p, q, r];
     prng.init(seed);
     prng;
   };
@@ -70,7 +55,7 @@ module SFC64 {
   /// rng.init(0);
   /// ```
   public func init(self : SFC64, seed : (implicit : (defaultSFC64Seed : Nat64))) = init3(self, seed, seed, seed);
-
+  
   /// Initializes the PRNG state with three state variables
   ///
   /// Example:
@@ -80,10 +65,10 @@ module SFC64 {
   /// rng.init3(0, 1, 2);
   /// ```
   public func init3(self : SFC64, seed1 : Nat64, seed2 : Nat64, seed3 : Nat64) {
-    self.a := seed1;
-    self.b := seed2;
-    self.c := seed3;
-    self.d := 1;
+    self[0] := seed1;
+    self[1] := seed2;
+    self[2] := seed3;
+    self[3] := 1;
 
     var i_ : Nat8 = 12;
     while (i_ > 0) {
@@ -101,17 +86,17 @@ module SFC64 {
   /// rng.next(); // -> 4_237_781_876_154_851_393
   /// ```
   public func next(self : SFC64) : Nat64 {
-    let a_ = self.a;
-    let b_ = self.b;
-    let c_ = self.c;
-    let d_ = self.d;
+    let a = self[0];
+    let b = self[1];
+    let c = self[2];
+    let d = self[3];
 
-    let result = a_ +% b_ +% d_;
+    let result = a +% b +% d;
 
-    self.a := b_ ^ (b_ >> self.q);
-    self.b := c_ +% (c_ << self.r);
-    self.c := (c_ <<> self.p) +% result;
-    self.d := d_ +% 1;
+    self[0] := b ^ (b >> self[5]);
+    self[1] := c +% (c << self[6]);
+    self[2] := (c <<> self[4]) +% result;
+    self[3] := d +% 1;
 
     result;
   };

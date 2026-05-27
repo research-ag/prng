@@ -21,15 +21,8 @@
 
 module SFC32 {
   /// State of an SFC 32-bit generator.
-  public type SFC32 = {
-    p : Nat32;
-    q : Nat32;
-    r : Nat32;
-    var a : Nat32;
-    var b : Nat32;
-    var c : Nat32;
-    var d : Nat32;
-  };
+  /// Layout: `[a, b, c, d, p, q, r]`
+  public type SFC32 = [var Nat32];
 
   /// Default seed for SFC32 generators.
   public let defaultSFC32Seed : Nat32 = 0xbeef5eed;
@@ -51,15 +44,7 @@ module SFC32 {
   /// let rng = Prng.SFC32.SFC32a();
   /// ```
   public func new(p : Nat32, q : Nat32, r : Nat32, seed : (implicit : (defaultSFC32Seed : Nat32))) : SFC32 {
-    let prng : SFC32 = {
-      p;
-      q;
-      r;
-      var a = 0;
-      var b = 0;
-      var c = 0;
-      var d = 0;
-    };
+    let prng : SFC32 = [var 0, 0, 0, 0, p, q, r];
     prng.init(seed);
     prng;
   };
@@ -83,10 +68,10 @@ module SFC32 {
   /// rng.init3(0, 1, 2);
   /// ```
   public func init3(self : SFC32, seed1 : Nat32, seed2 : Nat32, seed3 : Nat32) {
-    self.a := seed1;
-    self.b := seed2;
-    self.c := seed3;
-    self.d := 1;
+    self[0] := seed1;
+    self[1] := seed2;
+    self[2] := seed3;
+    self[3] := 1;
 
     var i_ : Nat8 = 12;
     while (i_ > 0) {
@@ -104,17 +89,17 @@ module SFC32 {
   /// rng.next(); // -> 1_363_572_419
   /// ```
   public func next(self : SFC32) : Nat32 {
-    let a_ = self.a;
-    let b_ = self.b;
-    let c_ = self.c;
-    let d_ = self.d;
+    let a = self[0];
+    let b = self[1];
+    let c = self[2];
+    let d = self[3];
 
-    let result = a_ +% b_ +% d_;
+    let result = a +% b +% d;
 
-    self.a := b_ ^ (b_ >> self.q);
-    self.b := c_ +% (c_ << self.r);
-    self.c := (c_ <<> self.p) +% result;
-    self.d := d_ +% 1;
+    self[0] := b ^ (b >> self[5]);
+    self[1] := c +% (c << self[6]);
+    self[2] := (c <<> self[4]) +% result;
+    self[3] := d +% 1;
 
     result;
   };
