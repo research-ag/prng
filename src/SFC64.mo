@@ -55,7 +55,7 @@ module SFC64 {
   /// rng.init(0);
   /// ```
   public func init(self : SFC64, seed : (implicit : (defaultSFC64Seed : Nat64))) = init3(self, seed, seed, seed);
-  
+
   /// Initializes the PRNG state with three state variables
   ///
   /// Example:
