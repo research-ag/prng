@@ -125,7 +125,7 @@ Wasm instructions per invocation of `next()`.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 167       | 320   | 270   |
+| next   | 382       | 754   | 380   |
 
 ### Memory
 
@@ -133,7 +133,7 @@ Heap allocation per invocation of `next()`.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 35        | 47    | 16    |
+| next   | 12        | 12    | 4     |
 
 ## Copyright
 
