@@ -1,6 +1,6 @@
 [package]
 name = "prng"
-version = "0.0.9"
+version = "0.0.10"
 description = "Statistical pseudo-random number generators"
 repository = "https://github.com/research-ag/prng"
 keywords = [ "rand", "random", "rng", "sfc", "seiran" ]
@@ -14,5 +14,4 @@ bench-helper = "0.0.3"
 moc = "0.7.0"
 
 [toolchain]
-moc = "1.7.0"
-pocket-ic = "9.0.3"
+moc = "1.8.2"
