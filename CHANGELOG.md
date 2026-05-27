@@ -1,5 +1,12 @@
 # Prng changelog
 
+## 0.1.0
+
+- Rewrite of the API
+- Use static records for easier persistency
+- Requires `moc 1.0.0` or higher
+- Optimize performance
+
 ## 0.0.9
 
 - Use bench-helper package

@@ -9,9 +9,9 @@
 /// Algorithm 2: SFC64 and SFC32 (Chris Doty-Humphrey’s Small Fast Chaotic PRNG)
 /// See: https://numpy.org/doc/stable/reference/random/bit_generators/sfc64.html
 ///
-/// Copyright: 2023 MR Research AG
-/// Main author: react0r-com
-/// Contributors: Timo Hanke (timohanke)
+/// Copyright: 2023-26 MR Research AG
+/// Main author: Timo Hanke (timohanke)
+/// Contributors: Andy Gura (AndyGura), react0r-com
 
 import Seiran128_ "./Seiran128";
 import SFC64_ "./SFC64";

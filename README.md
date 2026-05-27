@@ -34,49 +34,54 @@ You need `mops` installed. In your project directory run:
 mops add prng
 ```
 
-In the Motoko source file import the package as:
+In the Motoko source file import the generators you need:
 
 ```motoko
-import Prng "mo:prng";
-
+import { Seiran128; SFC64; SFC32 } "mo:prng";
 ```
+
+(Importing the modules directly — e.g. `import Seiran128 "mo:prng/Seiran128"` — works too and is required for the `rng.next()` method-call syntax to resolve.)
 
 ### Example
 
-The two most commonly used generators from this package are Seiran128 und SFC64a.
+The two most commonly used generators from this package are Seiran128 and SFC64a.
 They both produce Nat64 output values.
-SFC64a is compatible to numpy.
+SFC64a is compatible with numpy.
 
 ```motoko
-import Prng "mo:prng";
+import { Seiran128; SFC64 } "mo:prng";
 
 let seed : Nat64 = 0;
 
-let rng = Prng.Seiran128();
-rng.init(seed);
+let rng = Seiran128.new(seed);
 let seq : [Nat64] = [rng.next(), rng.next()];
 
-let rng2 = Prng.SFC64a();
-rng2.init(seed);
+let rng2 = SFC64.SFC64a(seed);
 let seq2 : [Nat64] = [rng2.next(), rng2.next()];
+```
 
+The seed argument is optional; omitting it uses each algorithm's default seed:
+
+```motoko
+import { Seiran128; SFC64 } "mo:prng";
+
+let rng = Seiran128.new();   // uses defaultSeiran128Seed
+let rng2 = SFC64.SFC64a();   // uses defaultSFC64Seed
 ```
 
 There are also two recommended Nat32 generators, SFC32a and SFC32b, used as follows.
 
 ```motoko
-import Prng "mo:prng";
+import { SFC32 } "mo:prng";
 
 let seed : Nat32 = 0;
 
-let rng = Prng.SFC32a(); // or Prng.SFC32b()
-rng.init(seed);
+let rng = SFC32.SFC32a(seed); // or SFC32.SFC32b(seed)
 let seq : [Nat32] = [rng.next(), rng.next()];
-
 ```
 
-For SFC the internal parameters of the generator can also be customized with a constructor like `Prng.SFC64(24, 11, 3)`.
-For more details take a look at the test file, the documentation in the source code, or https://mops.one/prng/docs.
+For SFC the internal parameters of the generator can also be customized with a constructor like `SFC64.new(24, 11, 3, seed)`.
+For more details take a look at the test files, the documentation in the source code, or https://mops.one/prng/docs.
 
 ### Build & test
 
@@ -103,13 +108,12 @@ npx -y prettier --plugin prettier-plugin-motoko --write '**/*.{mo,json,md}'
 Run
 
 ```bash
-mops bench --replica pocket-ic
+mops bench
 ```
 
-### Canister profiling
+### Profiling
 
-The benchmarking code can be found here: [canister-profiling](https://github.com/research-ag/canister-profiling)
-The values below were measured with moc 0.11.1 and dfx 0.20.1.
+The benchmarking was done with `mops bench --replica dfx`.
 
 ### Time
 
@@ -117,7 +121,7 @@ Wasm instructions per invocation of `next()`.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 215       | 320   | 274   |
+| next   | 253       | 525   | 475   |
 
 ### Memory
 
@@ -125,17 +129,17 @@ Heap allocation per invocation of `next()`.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 36        | 48    | 16    |
+| next   | 35        | 47    | 16    |
 
 ## Copyright
 
-MR Research AG, 2023-24
+MR Research AG, 2023-26
 
 ## Authors
 
-Main author: react0r-com
+Main author: Timo Hanke (timohanke)
 
-Contributors: Timo Hanke (timohanke)
+Contributors: Andy Gura (AndyGura), react0r-com
 
 ## License
 
