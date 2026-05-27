@@ -1,5 +1,9 @@
 # Prng changelog
 
+## 0.0.10
+
+- Fix benchmark accuracy
+
 ## 0.0.9
 
 - Use bench-helper package
