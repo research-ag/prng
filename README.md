@@ -108,8 +108,7 @@ mops bench --replica pocket-ic
 
 ### Canister profiling
 
-The benchmarking code can be found here: [canister-profiling](https://github.com/research-ag/canister-profiling)
-The values below were measured with moc 0.11.1 and dfx 0.20.1.
+The benchmarks were produced with `mops bench --replica dfx`.
 
 ### Time
 
@@ -117,7 +116,7 @@ Wasm instructions per invocation of `next()`.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 215       | 320   | 274   |
+| next   | 190       | 288   | 238   |
 
 ### Memory
 
@@ -125,7 +124,7 @@ Heap allocation per invocation of `next()`.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 36        | 48    | 16    |
+| next   | 35        | 47    | 16    |
 
 ## Copyright
 
