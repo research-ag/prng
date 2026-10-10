@@ -31,10 +31,10 @@ jobs:
           $(mops toolchain bin moc) --version
 
       - name: Install dependencies
-        run: mops install
+        run: mops install --locked
 
       - name: Run tests
-        run: mops test
+        run: mops test --locked
 
       - name: Make sure pocket-ic is installed
         run: mops toolchain bin pocket-ic
@@ -43,7 +43,7 @@ jobs:
         run: mops toolchain bin wasm-opt
 
       - name: Run benchmarks
-        run: mops bench
+        run: mops bench --locked
 
   fmt:
     name: Formatting Check
