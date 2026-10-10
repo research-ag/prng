@@ -126,7 +126,7 @@ Wasm instructions per invocation of `next()` (including loop overhead).
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 683       | 1257  | 607   |
+| next   | 665       | 1239  | 607   |
 
 ### Memory
 
