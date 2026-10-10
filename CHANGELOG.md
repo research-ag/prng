@@ -1,5 +1,10 @@
 # Prng changelog
 
+## 0.2.1
+
+- Compiles warning-free with moc 2.0.0.
+- Updated benchmark results for moc 2.0.0 (EOP, 64-bit heap, wasm-opt).
+
 ## 0.2.0
 
 - Allocation-free version

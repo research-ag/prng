@@ -11,7 +11,7 @@ for (
     0x35152DE6 : Nat32,
     0xF57C4105 : Nat32,
     0xD1F7B548 : Nat32,
-  ].vals()
+  ].values()
 ) {
   let n = prng3.next();
   assert (v == n);
@@ -27,7 +27,7 @@ for (
     0xB2E53014 : Nat32,
     0x3D56E4C7 : Nat32,
     0xEDA6A65F : Nat32,
-  ].vals()
+  ].values()
 ) {
   let n = prng4.next();
   assert (v == n);

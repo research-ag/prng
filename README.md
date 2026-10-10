@@ -115,25 +115,26 @@ Run
 mops bench
 ```
 
-### Profiling
+### Results
 
-The benchmarks were produced with `mops bench --replica dfx`.
+Produced with `mops bench` using moc 2.0.0 (enhanced orthogonal persistence,
+64-bit heap, incremental GC) with `wasm-opt -O3` applied.
 
 ### Time
 
-Wasm instructions per invocation of `next()`.
+Wasm instructions per invocation of `next()` (including loop overhead).
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 382       | 754   | 380   |
+| next   | 683       | 1257  | 607   |
 
 ### Memory
 
-Heap allocation per invocation of `next()`.
+Heap allocation per invocation of `next()`, in bytes.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 12        | 12    | 4     |
+| next   | 30        | 30    | 0     |
 
 ## Copyright
 
