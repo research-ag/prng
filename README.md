@@ -14,7 +14,6 @@ Currently implemented generators:
 ### Links
 
 The package is published on [Mops](https://mops.one/prng) and [GitHub](https://github.com/research-ag/prng).
-Please refer to the README on GitHub where it renders properly with formulas and tables.
 
 API documentation: [here on Mops](https://mops.one/prng/docs/lib)
 
