@@ -1,5 +1,11 @@
 # Prng changelog
 
+## 0.3.1
+
+- Store the generator state in `Nat32` slots: about half the instructions per `next()` on the 64-bit heap.
+- **Breaking:** State type changed from `[var Nat16]` to `[var Nat32]`.
+- Add a test that `next()` allocates only its return value.
+
 ## 0.3.0
 
 - Compiles warning-free with moc 2.0.0.

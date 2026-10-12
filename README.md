@@ -126,11 +126,14 @@ Wasm instructions per invocation of `next()` (including loop overhead).
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 665       | 1239  | 607   |
+| next   | 324       | 551   | 251   |
 
 ### Memory
 
 Heap allocation per invocation of `next()`, in bytes.
+
+This is the boxed `Nat64` return value (32 bytes for outputs ≥ 2^60);
+updating the state allocates nothing.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
@@ -152,6 +155,7 @@ published (Seiran128 / SFC64 / SFC32):
 | 0.1.1   | 167 / 320 / 271       | moc 1.8.2, dfx 0.31.0                 | Bench calls `next` directly instead of through a closure                                                                                                                 |
 | 0.2.0   | 382 / 754 / 380       | moc 1.8.2, dfx 0.31.0                 | Code only: the state is stored in `Nat16` slots, so state updates no longer allocate on the 32-bit heap (only the returned value does), at the cost of more instructions |
 | 0.3.0   | 665 / 1239 / 607      | moc 2.0.0, pocket-ic 15.0.0, wasm-opt | Enhanced orthogonal persistence (64-bit heap, incremental GC) instead of legacy persistence; same code as 0.2.0                                                          |
+| 0.3.1   | 324 / 551 / 251       | moc 2.0.0, pocket-ic 15.0.0, wasm-opt | Code only: the state is stored in `Nat32` slots, which are never boxed on the 64-bit heap                                                                                |
 
 Up to 0.2.0, `mops publish` measured with legacy persistence and the copying
 GC; from 0.3.0 on with enhanced orthogonal persistence and the incremental GC.
