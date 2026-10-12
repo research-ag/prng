@@ -3,7 +3,7 @@
 ## 0.3.0
 
 - Compiles warning-free with moc 2.0.0.
-- Updated benchmark results for moc 2.0.0 (EOP, 64-bit heap, wasm-opt).
+- Benchmarks are now measured with moc 2.0.0 (enhanced orthogonal persistence, 64-bit heap, incremental GC, wasm-opt) instead of legacy persistence: +60–74% instructions per `next()` compared to 0.2.0, with unchanged code. See "Benchmark history" in the README.
 
 ## 0.2.0
 
