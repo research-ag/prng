@@ -11,7 +11,7 @@ for (
     0x941C2B08EB30A631 : Nat64,
     0x4246BDC17AD8CA1E : Nat64,
     0x5D5DA3E87E82EB7C : Nat64,
-  ].vals()
+  ].values()
 ) {
   let n = prng.next();
   assert (v == n);

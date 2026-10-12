@@ -1,5 +1,10 @@
 # Prng changelog
 
+## 0.3.0
+
+- Compiles warning-free with moc 2.0.0.
+- Benchmarks: +60–74% instructions due to the compiler switch to the 64-bit heap.
+
 ## 0.2.0
 
 - Allocation-free version

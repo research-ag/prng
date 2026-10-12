@@ -14,7 +14,6 @@ Currently implemented generators:
 ### Links
 
 The package is published on [Mops](https://mops.one/prng) and [GitHub](https://github.com/research-ag/prng).
-Please refer to the README on GitHub where it renders properly with formulas and tables.
 
 API documentation: [here on Mops](https://mops.one/prng/docs/lib)
 
@@ -102,7 +101,8 @@ mops test
 To format the code, run:
 
 ```bash
-npx -y prettier --plugin prettier-plugin-motoko --write '**/*.{mo,json,md}'
+npm install --no-save prettier prettier-plugin-motoko
+npx prettier --plugin prettier-plugin-motoko --write '**/*.{mo,json,md}'
 ```
 
 ## Benchmarks
@@ -115,25 +115,46 @@ Run
 mops bench
 ```
 
-### Profiling
+### Results
 
-The benchmarks were produced with `mops bench --replica dfx`.
+Produced with `mops bench` using moc 2.0.0 (enhanced orthogonal persistence,
+64-bit heap, incremental GC) with `wasm-opt -O3` applied.
 
 ### Time
 
-Wasm instructions per invocation of `next()`.
+Wasm instructions per invocation of `next()` (including loop overhead).
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 382       | 754   | 380   |
+| next   | 665       | 1239  | 607   |
 
 ### Memory
 
-Heap allocation per invocation of `next()`.
+Heap allocation per invocation of `next()`, in bytes.
 
 | method | Seiran128 | SFC64 | SFC32 |
 | ------ | --------- | ----- | ----- |
-| next   | 12        | 12    | 4     |
+| next   | 30        | 30    | 0     |
+
+### Benchmark history
+
+The Versions page on mops.one compares each version's benchmarks with the
+previous version's. Most of the large jumps come from changes in the
+measurement setup, not from the code. Instructions per `next()` call as
+published (Seiran128 / SFC64 / SFC32):
+
+| Version | Instructions per call | Setup                                 | Cause of the change                                                                                                                                                      |
+| ------- | --------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 0.0.7   | 244 / 383 / 332       | moc 1.1.0, dfx 0.29.2                 |                                                                                                                                                                          |
+| 0.0.8   | 150 / 288 / 238       | moc 1.1.0, dfx 0.29.2                 | Bench rewritten with less loop and per-cell overhead                                                                                                                     |
+| 0.1.0   | 288 / 575 / 524       | moc 1.8.2, pocket-ic 9.0.3            | New static API; the bench called `next` through a closure returning `Any`; new moc and replica                                                                           |
+| 0.0.10  | 198 / 303 / 253       | moc 1.8.2, pocket-ic 9.0.3            | Old API. Published after 0.1.0, so mops.one compares it with 0.1.0. The bench now seeds Seiran128 (before, its state was all zeros)                                      |
+| 0.1.1   | 167 / 320 / 271       | moc 1.8.2, dfx 0.31.0                 | Bench calls `next` directly instead of through a closure                                                                                                                 |
+| 0.2.0   | 382 / 754 / 380       | moc 1.8.2, dfx 0.31.0                 | Code only: the state is stored in `Nat16` slots, so state updates no longer allocate on the 32-bit heap (only the returned value does), at the cost of more instructions |
+| 0.3.0   | 665 / 1239 / 607      | moc 2.0.0, pocket-ic 15.0.0, wasm-opt | Enhanced orthogonal persistence (64-bit heap, incremental GC) instead of legacy persistence; same code as 0.2.0                                                          |
+
+Up to 0.2.0, `mops publish` measured with legacy persistence and the copying
+GC; from 0.3.0 on with enhanced orthogonal persistence and the incremental GC.
 
 ## Copyright
 

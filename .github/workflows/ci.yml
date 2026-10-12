@@ -23,7 +23,7 @@ jobs:
         uses: caffeinelabs/setup-mops@v1
 
       - name: Make sure moc is installed
-        run: mops toolchain init && mops toolchain bin moc
+        run: mops toolchain bin moc
 
       - name: Show versions
         run: |
@@ -31,16 +31,19 @@ jobs:
           $(mops toolchain bin moc) --version
 
       - name: Install dependencies
-        run: mops install
+        run: mops install --locked
 
       - name: Run tests
-        run: mops test
+        run: mops test --locked
 
-      - name: Install dfx
-        uses: dfinity/setup-dfx@main
+      - name: Make sure pocket-ic is installed
+        run: mops toolchain bin pocket-ic
+
+      - name: Make sure wasm-opt is installed
+        run: mops toolchain bin wasm-opt
 
       - name: Run benchmarks
-        run: mops bench
+        run: mops bench --locked
 
   fmt:
     name: Formatting Check
