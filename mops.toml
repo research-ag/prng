@@ -1,6 +1,6 @@
 [package]
 name = "prng"
-version = "0.3.0"
+version = "0.3.1"
 description = "Statistical pseudo-random number generators"
 repository = "https://github.com/research-ag/prng"
 keywords = [ "rand", "random", "rng", "sfc", "seiran" ]
@@ -9,6 +9,7 @@ license = "Apache-2.0"
 [dev-dependencies]
 core = "2.6.2"
 bench-helper = "0.0.4"
+test = "2.1.2"
 
 [requirements]
 moc = "1.0.0"
@@ -17,5 +18,6 @@ moc = "1.0.0"
 moc = "2.0.0"
 pocket-ic = "15.0.0"
 wasm-opt = "133"
+wasmtime = "44.0.0"
 
 [optimize]

@@ -33,6 +33,9 @@ jobs:
       - name: Install dependencies
         run: mops install --locked
 
+      - name: Make sure wasmtime is installed
+        run: mops toolchain bin wasmtime
+
       - name: Run tests
         run: mops test --locked
 
